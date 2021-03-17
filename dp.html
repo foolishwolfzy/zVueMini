@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object.defineProperty</title>
+</head>
+<body>
+    <div id="app">
+        <p>你好，<span id="name"></span></p>
+        <p>hi，<span id="name.f"></span></p>
+    </div>
+    <script>
+        var obj = {};
+        
+        // 数据拦截
+        Object.defineProperty(obj, 'name', {
+            get(){
+                console.log('有人想要获取name属性');
+                return document.getElementById('name').innerHTML
+            },
+            set(nick){
+                console.log('有人想要修改name属性');
+                document.getElementById('name').innerHTML = nick;
+            },
+        })
+
+        //这样不行
+        // Object.defineProperty(obj, 'name.f', {
+        //     get(){
+        //         console.log('有人想要获取name.f属性');
+        //         return document.getElementById('name.f').innerHTML
+        //     },
+        //     set(nick){
+        //         console.log('有人想要修改name.f属性');
+        //         document.getElementById('name.f').innerHTML = nick;
+        //     },
+        // })
+
+        console.log(obj.name);
+        obj.name = 'jerry'
+        console.log(obj.name);
+
+        // console.log(obj.name.f);
+        // obj.name.f = 'tom'
+        // console.log(obj.name.f);
+        const nums = []
+        const nums2 = []
+        const nums3 = []
+        const arr=100
+        for (let i = 1; i <= arr; i++) {
+            // const element = arr[i];
+            nums.push(i)
+            nums2.push(i)
+        }
+        nums2.reverse()
+        for (let j = 0; j < nums.length; j++) {
+            const n1= nums[j];
+            // const n2= nums2[j];
+            for (let i = 0; i < nums2.length; i++) {
+                const n2 = nums2[i];
+                console.log('n1--',n1)
+                console.log('n2--',n2)
+                console.log('%---',n2%n1)
+            if(n2%n1 != 0){
+                nums3.push([n1,n2])
+            }
+                
+            }
+        }
+        console.log(nums3);
+    </script>
+</body>
+</html>

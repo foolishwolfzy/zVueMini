@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+
+<body>
+    <div id="app">
+        <div k-html="html"></div>
+        <p>{{name}}</p>
+        <p k-text="name"></p>
+        <p>{{age}}</p>
+        <p k-html="desc"></p>
+        <input type="text" k-model="name">
+        <button @click="changeName">呵呵</button>
+        <input type="text" k-model="desc">
+        
+    </div>
+    <script src='./compile.js'></script>
+    <script src='./zvue.js'></script>
+
+    <script>
+        const k = new KVue({
+            el: '#app',
+            data: {
+                name: "I am test.",
+                inputName:'',
+                age: 12,
+                html: '<button>这是一个按钮</button>',
+                desc:'<span style="color:red">hahaha</span>',
+                arr:[1,2]
+            },
+            created() {
+                console.log('开始啦')
+                setTimeout(() => {
+                    this.name = '我是测试'
+                    this.age = 2
+                }, 1500)
+            },
+            methods: {
+                changeName() {
+                    console.log('changeName---====')
+                    this.name = '哈喽，呵呵呵'
+                    this.age = 1
+                    this.arr.push(3)
+                }
+            }
+        })
+    </script>
+</body>
+<!-- <script>
+        const app = new KVue({
+            data: { foo: 'foo', bar: { mua: 'mua' } }
+        })   
+        app.foo = 'aaa' 
+        app.bar.mua = 'aaa' 
+
+        console.log(app.$data);
+
+        
+    </script> -->
+
+
+</html>
